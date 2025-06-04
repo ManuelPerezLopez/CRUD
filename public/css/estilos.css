@@ -1,0 +1,5 @@
+
+/* aplica estilos al elemento con la clase container, siempre que sea un hijo directo de un main. */
+main>.container{
+    padding:  20px 30px 
+}

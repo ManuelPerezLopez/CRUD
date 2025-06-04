@@ -1,0 +1,9 @@
+__ci_last_regenerate|i:1749058129;_ci_previous_url|s:51:"http://localhost/CRUD/public/index.php/usuarios/new";_ci_old_input|a:2:{s:3:"get";a:0:{}s:4:"post";a:3:{s:6:"nombre";s:7:"JWNTJGN";s:5:"email";s:17:"aronWRT@gmail.com";s:11:"contraseña";s:15:"ManoloproMax.12";}}__ci_vars|a:3:{s:13:"_ci_old_input";s:3:"old";s:21:"_ci_validation_errors";s:3:"old";s:5:"error";s:3:"old";}_ci_validation_errors|a:1:{s:9:"confirmar";s:34:"El campo confirmar es obligatorio.";}error|s:243:"<!-- DEBUG-VIEW START 1 SYSTEMPATH\Validation\Views\list.php -->
+	<div class="errors" role="alert">
+		<ul>
+					<li>El campo confirmar es obligatorio.</li>
+				</ul>
+	</div>
+
+<!-- DEBUG-VIEW ENDED 1 SYSTEMPATH\Validation\Views\list.php -->
+";
