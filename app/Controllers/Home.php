@@ -3,9 +3,47 @@
 namespace App\Controllers;
 
 use App\Models\UsuariosModel;
+use Firebase\JWT\JWT;
 
 class Home extends BaseController
 {
+    public function loginForm()
+    {
+        return view('auth/login'); // asegúrate de que exista esa vista
+    }
+
+    public function login()
+    {
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+
+        $usuario = model('UsuariosModel')->where('email', $email)->first();
+
+        if (!$usuario || !password_verify($password, $usuario['contraseña'])) {
+            return $this->response->setStatusCode(401)->setJSON(['message' => 'Credenciales inválidas']);
+        }
+
+        $key = getenv('JWT_SECRET');
+        $payload = [
+            'iss' => 'http://localhost',
+            'aud' => 'http://localhost',
+            'iat' => time(),
+            'exp' => time() + 3600,
+            'sub' => $usuario['id']
+        ];
+
+        $jwt = JWT::encode($payload, $key, 'HS256');
+
+        return $this->response->setJSON(['token' => $jwt]);
+    }
+
+    public function perfil()
+    {
+        return $this->response->setJSON(['usuario' => 'datos simulados']);
+    }
+
+    // Redirige al método index del controlador Usuarios
+
     /**
      * Return an array of resource objects, themselves in array format.
      *
@@ -25,11 +63,10 @@ class Home extends BaseController
         $data['usuarios'] = $usuariosModel->findAll(); // 🔄 sin paginación
         $data['buscar'] = $busqueda;
 
+        return view('auth/login');
+
         return view('usuarios/index', $data);
     }
-
-
-
 
     /**
      * Return the propeties of a resource object

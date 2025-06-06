@@ -31,6 +31,11 @@ class Usuarios extends BaseController //cambie la herencia a BaseController
     }
 
 
+    public function perfil()
+    {
+        return $this->response->setJSON(['usuario' => 'datos simulados']);
+    }
+
 
 
     /**
