@@ -15,6 +15,13 @@ $routes->group('api', ['filter' => 'jwt'], function($routes) {
     $routes->get('usuarios', 'Api\Home::index');
 });
 
+$routes->get('clientes/index/(:num)', 'Clientes::index/$1');
+$routes->get('clientes/new/(:num)', 'Clientes::new/$1');
+$routes->post('clientes/create/(:num)', 'Clientes::create/$1');
+$routes->get('clientes/edit/(:num)', 'Clientes::edit/$1');
+$routes->post('clientes/update/(:num)', 'Clientes::update/$1');
+$routes->get('clientes/delete/(:num)', 'Clientes::delete/$1');
+
 
 
 $routes->get('/', 'Home::index'); //ruta raiz

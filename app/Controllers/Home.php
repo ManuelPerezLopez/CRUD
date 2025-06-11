@@ -63,7 +63,7 @@ class Home extends BaseController
         $data['usuarios'] = $usuariosModel->findAll(); // 🔄 sin paginación
         $data['buscar'] = $busqueda;
 
-        return view('auth/login');
+        //return view('auth/login');
 
         return view('usuarios/index', $data);
     }

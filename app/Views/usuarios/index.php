@@ -50,6 +50,7 @@
                             <a href="<?= base_url('usuarios/' . $usuario['id'] . '/edit') ?>" class="btn btn-sm btn-primary">Editar</a>
                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#eliminaModal" data-bs-id="<?= base_url('usuarios/' . $usuario['id']) ?>">Eliminar</button>
                         </td>
+                        <td><a href="<?= base_url('clientes/index/' . $usuario['id']) ?>" class="btn btn-sm btn-info">Catálogo</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
