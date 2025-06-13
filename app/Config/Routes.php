@@ -6,15 +6,18 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->get('auth/login', 'Auth::loginForm');  // muestra el formulario
-$routes->post('auth/login', 'Auth::login');     // procesa el login
-$routes->post('api/login', 'Api\Auth::login'); // para procesar el login (API)
+// Rutas de Autenticación (Web y API)
+$routes->get('auth/login', 'Auth::loginForm');     // Muestra formulario login
+$routes->post('auth/login', 'Auth::login');        // Procesa login
+$routes->post('api/login', 'Api\Auth::login');     // Procesa login vía API (JWT)
 
-$routes->group('api', ['filter' => 'jwt'], function($routes) {
-    $routes->get('perfil', 'Api\Home::perfil');  // solo accesible con JWT válido
-    $routes->get('usuarios', 'Api\Home::index');
+// Rutas protegidas por JWT para API
+$routes->group('api', ['filter' => 'jwt'], function ($routes) {
+    $routes->get('perfil', 'Api\Home::perfil');    // Perfil del usuario autenticado
+    $routes->get('usuarios', 'Api\Home::index');   // Lista de usuarios
 });
 
+// Rutas del módulo de Clientes (vinculados a un usuario)
 $routes->get('clientes/index/(:num)', 'Clientes::index/$1');
 $routes->get('clientes/new/(:num)', 'Clientes::new/$1');
 $routes->post('clientes/create/(:num)', 'Clientes::create/$1');
@@ -22,11 +25,20 @@ $routes->get('clientes/edit/(:num)', 'Clientes::edit/$1');
 $routes->post('clientes/update/(:num)', 'Clientes::update/$1');
 $routes->get('clientes/delete/(:num)', 'Clientes::delete/$1');
 
+// Rutas del módulo de Productos o Servicios (vinculados a un usuario)
+$routes->get('productos/(:num)', 'ProductosController::index/$1');
+$routes->get('productos/new', 'ProductosController::new/1'); // reemplaza 1 con el ID del usuario por defecto
+$routes->post('productos/(:num)/store', 'ProductosController::store/$1');
+$routes->get('productos/edit/(:num)', 'ProductosController::edit/$1');
+$routes->post('productos/update/(:num)', 'ProductosController::update/$1');
+$routes->get('productos/delete/(:num)', 'ProductosController::delete/$1');
 
 
-$routes->get('/', 'Home::index'); //ruta raiz
+// Ruta raíz
+$routes->get('/', 'Home::index');
 
-$routes->resource('usuarios', ['placeholder'=> '(:num)', 'except' => ['show']]);
- // Crea las rutas RESTful para el recurso 'usuarios' con el método Resource(), exceptuando 'show'. Esto crea las cinco rutas más comunes necesarias para el CRUD.
-
-
+// CRUD de Usuarios (excepto show)
+$routes->resource('usuarios', [
+    'placeholder' => '(:num)',
+    'except' => ['show']
+]);
