@@ -1,10 +1,21 @@
 <?= $this->extend('layouts/main') ?>
 
+<?php if (session('errors')) : ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach (session('errors') as $error) : ?>
+                <li><?= esc($error) ?></li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
 <?= $this->section('content') ?>
 <div class="container-fluid container-fixed-lg">
     <h2>Agregar Producto o Servicio</h2>
     <form action="<?= base_url('productos/' . $usuarioId . '/store') ?>" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
+
         <div class="form-group">
             <label>Nombre</label>
             <input type="text" name="nombre" class="form-control" value="<?= old('nombre') ?>" required>
@@ -22,7 +33,7 @@
 
         <div class="form-group">
             <label>Unidad de Medida</label>
-            <input type="text" name="unidad" class="form-control" value="<?= old('unidad') ?>" required>
+            <input type="text" name="unidad_medida" class="form-control" value="<?= old('unidad_medida') ?>" required>
         </div>
 
         <div class="form-group">

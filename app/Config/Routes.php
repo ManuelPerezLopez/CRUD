@@ -27,10 +27,10 @@ $routes->get('clientes/delete/(:num)', 'Clientes::delete/$1');
 
 // Rutas del módulo de Productos o Servicios (vinculados a un usuario)
 $routes->get('productos/(:num)', 'ProductosController::index/$1');
-$routes->get('productos/new', 'ProductosController::new/1'); // reemplaza 1 con el ID del usuario por defecto
+$routes->get('productos/(:num)/new', 'ProductosController::new/$1');
 $routes->post('productos/(:num)/store', 'ProductosController::store/$1');
 $routes->get('productos/edit/(:num)', 'ProductosController::edit/$1');
-$routes->post('productos/update/(:num)', 'ProductosController::update/$1');
+$routes->put('productos/update/(:num)', 'ProductosController::update/$1');
 $routes->get('productos/delete/(:num)', 'ProductosController::delete/$1');
 
 

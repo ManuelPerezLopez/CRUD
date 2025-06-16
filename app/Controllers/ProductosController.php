@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ProductoModel;
 use App\Models\UsuariosModel;
-use CodeIgniter\HTTP\ResponseInterface;
 
 class ProductosController extends BaseController
 {
@@ -32,20 +31,20 @@ class ProductosController extends BaseController
         $validation = \Config\Services::validation();
 
         $rules = [
-            'nombre'       => 'required|min_length[3]',
-            'descripcion'  => 'required',
-            'precio'       => 'required|decimal',
-            'unidad'       => 'required',
-            'categoria'    => 'required',
-            'estatus'      => 'required|in_list[activo,inactivo]',
-            'archivo'      => 'uploaded[archivo]|max_size[archivo,2048]|ext_in[archivo,jpg,jpeg,png,pdf,docx]',
+            'nombre'         => 'required|min_length[3]',
+            'descripcion'    => 'required',
+            'precio'         => 'required|decimal',
+            'unidad_medida'  => 'required',
+            'categoria'      => 'required',
+            'estatus'        => 'required|in_list[activo,inactivo]',
+            'archivo'        => 'uploaded[archivo]|max_size[archivo,2048]|ext_in[archivo,jpg,jpeg,png,pdf,docx]',
         ];
 
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-        // ⚠️ Verificar que el usuario exista
+        // Verificar que el usuario exista
         $usuarioModel = new UsuariosModel();
         $usuario = $usuarioModel->find($usuarioId);
 
@@ -59,19 +58,18 @@ class ProductosController extends BaseController
 
         $model = new ProductoModel();
         $model->save([
-            'usuario_id'  => $usuarioId,
-            'nombre'      => $this->request->getPost('nombre'),
-            'descripcion' => $this->request->getPost('descripcion'),
-            'precio'      => $this->request->getPost('precio'),
-            'unidad'      => $this->request->getPost('unidad'),
-            'categoria'   => $this->request->getPost('categoria'),
-            'estatus'     => $this->request->getPost('estatus'),
-            'archivo'     => $nombreArchivo
+            'usuario_id'     => $usuarioId,
+            'nombre'         => $this->request->getPost('nombre'),
+            'descripcion'    => $this->request->getPost('descripcion'),
+            'precio'         => $this->request->getPost('precio'),
+            'unidad_medida'  => $this->request->getPost('unidad_medida'),
+            'categoria'      => $this->request->getPost('categoria'),
+            'estatus'        => $this->request->getPost('estatus'),
+            'archivo'        => $nombreArchivo
         ]);
 
         return redirect()->to("/productos/$usuarioId")->with('success', 'Producto registrado correctamente');
     }
-
 
     public function edit($id)
     {
@@ -103,13 +101,13 @@ class ProductosController extends BaseController
         }
 
         $model->update($id, [
-            'nombre'      => $this->request->getPost('nombre'),
-            'descripcion' => $this->request->getPost('descripcion'),
-            'precio'      => $this->request->getPost('precio'),
-            'unidad'      => $this->request->getPost('unidad'),
-            'categoria'   => $this->request->getPost('categoria'),
-            'estatus'     => $this->request->getPost('estatus'),
-            'archivo'     => $nombreArchivo
+            'nombre'         => $this->request->getPost('nombre'),
+            'descripcion'    => $this->request->getPost('descripcion'),
+            'precio'         => $this->request->getPost('precio'),
+            'unidad_medida'  => $this->request->getPost('unidad_medida'),
+            'categoria'      => $this->request->getPost('categoria'),
+            'estatus'        => $this->request->getPost('estatus'),
+            'archivo'        => $nombreArchivo
         ]);
 
         return redirect()->to("/productos/" . $producto['usuario_id']);

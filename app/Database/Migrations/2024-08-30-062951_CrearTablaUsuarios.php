@@ -11,6 +11,7 @@ class CreaTablaUsuarios extends Migration
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
+                'unsigned'       => true, // <-- Esto es importante
                 'constraint' => 11,
                 'auto_increment' => true
             ],

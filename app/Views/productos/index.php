@@ -34,7 +34,7 @@
                     <div class="card-header">
                         <div class="card-title">Listado</div>
                         <div class="tools">
-                            <a href="<?= base_url('productos/new') ?>" class="btn btn-success btn-sm">
+                            <a href="<?= base_url('productos/' . $usuarioId . '/new') ?>" class="btn btn-success btn-sm">
                                 <i class="fi fi-rr-box"></i> Agregar Producto/Servicio
                             </a>
                         </div>
@@ -76,7 +76,7 @@
                                                 <td><?= esc($producto['nombre']) ?></td>
                                                 <td><?= esc($producto['descripcion']) ?></td>
                                                 <td>$<?= number_format($producto['precio'], 2) ?></td>
-                                                <td><?= esc($producto['unidad']) ?></td>
+                                                <td><?= esc($producto['unidad_medida']) ?></td>
                                                 <td><?= esc($producto['categoria']) ?></td>
                                                 <td>
                                                     <span class="badge badge-<?= $producto['estatus'] === 'activo' ? 'success' : 'secondary' ?>">
