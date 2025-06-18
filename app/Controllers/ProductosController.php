@@ -13,13 +13,29 @@ class ProductosController extends BaseController
     public function index($usuarioId)
     {
         $model = new ProductoModel();
-        $productos = $model->where('usuario_id', $usuarioId)->findAll();
+
+        // Obtener texto del buscador
+        $buscar = $this->request->getGet('buscarProducto');
+
+        if ($buscar) {
+            $productos = $model->where('usuario_id', $usuarioId)
+                ->groupStart()
+                ->like('nombre', $buscar)
+                ->orLike('categoria', $buscar)
+                ->orLike('estatus', $buscar)
+                ->groupEnd()
+                ->findAll();
+        } else {
+            $productos = $model->where('usuario_id', $usuarioId)->findAll();
+        }
 
         return view('productos/index', [
             'productos' => $productos,
-            'usuarioId' => $usuarioId
+            'usuarioId' => $usuarioId,
+            'buscarProducto' => $buscar
         ]);
     }
+
 
     public function new($usuarioId)
     {
@@ -47,6 +63,7 @@ class ProductosController extends BaseController
         // Verificar que el usuario exista
         $usuarioModel = new UsuariosModel();
         $usuario = $usuarioModel->find($usuarioId);
+
 
         if (!$usuario) {
             return redirect()->back()->with('error', 'El usuario no existe');

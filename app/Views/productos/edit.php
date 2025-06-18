@@ -24,7 +24,7 @@
 
         <div class="form-group">
             <label>Unidad de Medida</label>
-            <input type="text" name="unidad" class="form-control" value="<?= esc($producto['unidad_medida']) ?>" required>
+            <input type="text" name="unidad_medida" class="form-control" value="<?= esc($producto['unidad_medida']) ?>" required>
         </div>
 
         <div class="form-group">

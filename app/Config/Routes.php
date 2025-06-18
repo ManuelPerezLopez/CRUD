@@ -33,6 +33,7 @@ $routes->get('productos/edit/(:num)', 'ProductosController::edit/$1');
 $routes->put('productos/update/(:num)', 'ProductosController::update/$1');
 $routes->get('productos/delete/(:num)', 'ProductosController::delete/$1');
 
+$routes->get('catalogo', 'CatalogoController::index');
 
 // Ruta raíz
 $routes->get('/', 'Home::index');

@@ -71,6 +71,7 @@
                                             <td colspan="8" class="text-center">No hay productos registrados.</td>
                                         </tr>
                                     <?php else: ?>
+                                        
                                         <?php foreach ($productos as $producto): ?>
                                             <tr>
                                                 <td><?= esc($producto['nombre']) ?></td>
@@ -79,9 +80,7 @@
                                                 <td><?= esc($producto['unidad_medida']) ?></td>
                                                 <td><?= esc($producto['categoria']) ?></td>
                                                 <td>
-                                                    <span class="badge badge-<?= $producto['estatus'] === 'activo' ? 'success' : 'secondary' ?>">
-                                                        <?= esc(ucfirst($producto['estatus'])) ?>
-                                                    </span>
+                                                    <span class="badge badge-pill" style="background-color: <?= $producto['estatus'] === 'activo' ? '#28a745' : '#dc3545' ?>; color: white;"><?= esc(ucfirst($producto['estatus'])) ?></span>
                                                 </td>
                                                 <td>
                                                     <?php if (!empty($producto['archivo'])): ?>

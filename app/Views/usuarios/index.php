@@ -39,6 +39,7 @@
                     <th class="text-center">Opciones</th>
                     <th>Clientes</th>
                     <th>Productos</th>
+                    <th>Catalogo</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,6 +59,10 @@
                         <td>
                             <a href="<?= base_url('productos/' . $usuario['id']) ?>" class="btn btn-sm btn-warning">Productos</a>
                         </td>
+                        <td>
+                            <a href="<?= base_url('catalogo') ?>" class="btn btn-primary">Ver Catálogo</a>
+
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -67,5 +72,7 @@
     <!-- MODAL DE ELIMINACIÓN -->
     <?php echo $this->include('usuarios/delete'); ?>
 </div>
+
+
 
 <?php $this->endSection(); ?>
